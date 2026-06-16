@@ -1,4 +1,4 @@
-# 💄 Beauty Master Academy — Full MERN Stack Platform
+# 💄 Manisha Makeover Academy — Full MERN Stack Platform
 
 A premium subscription-based live beauty education platform built with the MERN stack.
 
