@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #E91E8C;
+  --color-secondary: #9C27B0;
+  --color-gold: #B76E79;
+  --color-dark: #0D0010;
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --blur: blur(20px);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #0D0010;
+  color: #f1f1f1;
+  overflow-x: hidden;
+}
+
+body.light-mode {
+  background: #FFF0F6;
+  color: #1a1a2e;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #1a0020; }
+::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 10px; }
+
+/* Glass Card */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(233, 30, 140, 0.15);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #E91E8C, #9C27B0, #B76E79);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gold-text {
+  background: linear-gradient(135deg, #B76E79 0%, #E8C99A 50%, #B76E79 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-6 py-3 rounded-full font-semibold text-white transition-all duration-300;
+  background: linear-gradient(135deg, #E91E8C, #9C27B0);
+  box-shadow: 0 4px 15px rgba(233, 30, 140, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(233, 30, 140, 0.5);
+}
+
+.btn-outline {
+  @apply px-6 py-3 rounded-full font-semibold transition-all duration-300;
+  border: 2px solid rgba(233, 30, 140, 0.5);
+  color: #E91E8C;
+}
+
+.btn-outline:hover {
+  background: rgba(233, 30, 140, 0.1);
+  border-color: #E91E8C;
+  transform: translateY(-2px);
+}
+
+/* Input styles */
+.input-beauty {
+  @apply w-full py-3 rounded-xl text-sm outline-none transition-all duration-300;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.input-beauty:focus {
+  border-color: #E91E8C;
+  box-shadow: 0 0 0 3px rgba(233, 30, 140, 0.15);
+}
+
+.input-beauty::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+/* Card hover effects */
+.card-hover {
+  transition: var(--transition);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(233, 30, 140, 0.2);
+}
+
+/* Gradient orbs */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* Loading shimmer */
+.shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Section headings */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  @apply text-3xl md:text-5xl font-bold;
+}
+
+/* Badge */
+.badge {
+  @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold;
+  background: rgba(233, 30, 140, 0.15);
+  border: 1px solid rgba(233, 30, 140, 0.3);
+  color: #E91E8C;
+}
+
+/* Page transition */
+.page-enter {
+  animation: pageEnter 0.4s ease-out forwards;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive utility */
+@media (max-width: 768px) {
+  .section-title { font-size: 2rem; }
+}
