@@ -37,7 +37,7 @@ export default function RegisterPage() {
 
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md relative">
         <div className="text-center mb-8">
-          <div className="w-14 h-14 rounded-full bg-pink-gradient flex items-center justify-center text-white font-bold text-2xl mx-auto mb-3">B</div>
+          <div className="w-14 h-14 rounded-full bg-pink-gradient flex items-center justify-center text-white font-bold text-2xl mx-auto mb-3">M</div>
           <h1 className="font-display text-3xl font-bold text-white">Join Manisha Makeover Academy</h1>
           <p className="text-gray-400 mt-2">Start your beauty career journey today</p>
         </div>

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 export function WhatsAppButton() {
   return (
     <motion.a
-      href="https://wa.me/919876543210?text=Hi! I'm interested in Beauty Master Academy courses."
+      href="https://wa.me/919012997494?text=Hi! I'm interested in Beauty Master Academy courses."
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0 }}

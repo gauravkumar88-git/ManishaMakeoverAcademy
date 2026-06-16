@@ -40,7 +40,7 @@ export default function LoginPage() {
         <div className="orb w-96 h-96 bg-pink-600 top-0 left-0" />
         <div className="orb w-64 h-64 bg-purple-600 bottom-0 right-0" />
         <div className="relative text-center px-12">
-          <div className="w-20 h-20 rounded-full bg-pink-gradient flex items-center justify-center text-white font-bold text-4xl mx-auto mb-6 shadow-beauty">B</div>
+          <div className="w-20 h-20 rounded-full bg-pink-gradient flex items-center justify-center text-white font-bold text-4xl mx-auto mb-6 shadow-beauty">M</div>
           <h2 className="font-display text-4xl font-bold text-white mb-4">Manisha Makeover Academy</h2>
           <p className="text-pink-200 leading-relaxed">Transform your passion for beauty into a professional career with live classes, expert mentorship, and industry-recognized certifications.</p>
           <div className="mt-10 space-y-4">

@@ -25,15 +25,15 @@ const features = [
 ];
 
 const testimonials = [
-  { name: 'Priya Sharma', city: 'Delhi', image: 'https://randomuser.me/api/portraits/women/44.jpg', text: "Beauty Master Academy transformed my life! I started my own salon within 3 months of completing the bridal makeup course.", rating: 5 },
-  { name: 'Kavya Reddy', city: 'Bangalore', image: 'https://randomuser.me/api/portraits/women/55.jpg', text: "The live classes are so interactive. My instructor's feedback helped me perfect my blending techniques in just 2 weeks.", rating: 5 },
-  { name: 'Ananya Singh', city: 'Mumbai', image: 'https://randomuser.me/api/portraits/women/68.jpg', text: "The certificate I got from here helped me land my dream job at a luxury wedding studio. Highly recommended!", rating: 5 },
+  { name: 'Priya Sharma', city: 'Delhi', image: 'https://randomuser.me/api/portraits/women/44.jpg', text: "Manisha Makeover Academy transformed my life! I started my own salon within 3 months of completing the bridal makeup course.", rating: 5 },
+  { name: 'Kavya Singh', city: 'Ghazabad', image: 'https://randomuser.me/api/portraits/women/55.jpg', text: "The live classes are so interactive. My instructor's feedback helped me perfect my blending techniques in just 2 weeks.", rating: 5 },
+  { name: 'Ananya', city: 'Baghpat', image: 'https://randomuser.me/api/portraits/women/68.jpg', text: "The certificate I got from here helped me land my dream job at a luxury wedding studio. Highly recommended!", rating: 5 },
 ];
 
 const plans = [
-  { name: 'Basic', price: '₹499', period: '/month', color: 'from-pink-500 to-rose-500', features: ['Live Classes Access', 'PDF Notes Download', 'Community Access', 'Attendance Tracking'], popular: false },
-  { name: 'Premium', price: '₹999', period: '/month', color: 'from-purple-500 to-pink-500', features: ['Everything in Basic', 'Class Recordings', 'Premium Content', 'Priority Support'], popular: true },
-  { name: 'VIP', price: '₹1999', period: '/month', color: 'from-amber-400 to-rose-500', features: ['Everything in Premium', 'One-to-One Mentorship', 'Exclusive Workshops', 'Career Placement Help'], popular: false },
+  { name: 'Basic', price: '₹59', period: '/month', color: 'from-pink-500 to-rose-500', features: ['Live Classes Access', 'PDF Notes Download', 'Community Access', 'Attendance Tracking'], popular: false },
+  { name: 'Premium', price: '₹99', period: '/month', color: 'from-purple-500 to-pink-500', features: ['Everything in Basic', 'Class Recordings', 'Premium Content', 'Priority Support'], popular: true },
+  { name: 'VIP', price: '₹159', period: '/month', color: 'from-amber-400 to-rose-500', features: ['Everything in Premium', 'One-to-One Mentorship', 'Exclusive Workshops', 'Career Placement Help'], popular: false },
 ];
 
 export default function HomePage() {

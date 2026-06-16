@@ -48,7 +48,7 @@ console.log("USER DATA:", user);
     <div className="flex flex-col h-full">
       {/* Logo */}
       <Link to="/" className="flex items-center gap-3 px-6 py-5 border-b border-white/10">
-        <div className="w-9 h-9 rounded-xl bg-pink-gradient flex items-center justify-center text-white font-bold shadow-beauty">B</div>
+        <div className="w-9 h-9 rounded-xl bg-pink-gradient flex items-center justify-center text-white font-bold shadow-beauty">M</div>
         <div>
           <div className="font-display font-bold text-white text-sm">ManishaMakeover</div>
           <div className="text-xs text-pink-400">{isAdmin ? 'Admin Panel' : 'Academy'}</div>

@@ -65,7 +65,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-gray-400 text-sm">
                 <FiPhone size={16} className="text-pink-400 flex-shrink-0" />
-                <span>+91 98765 43210</span>
+                <span>+91 9012997494</span>
               </li>
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <FiMapPin size={16} className="text-pink-400 flex-shrink-0 mt-0.5" />
