@@ -4,7 +4,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const uiSlice = createSlice({
   name: 'ui',
   initialState: {
-    darkMode: localStorage.getItem('darkMode') !== 'false',
+    darkMode: JSON.parse(
+  localStorage.getItem('darkMode') ?? 'true'
+),
     sidebarOpen: false,
     modalOpen: null,
   },
