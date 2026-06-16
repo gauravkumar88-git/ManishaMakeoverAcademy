@@ -44,10 +44,10 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email }).select('+password');
-  if (!user || !user.password) return res.status(401).json({ success: false, message: 'Invalid credentials.' });
+  if (!user || !user.password) return res.status(401).json({ success: false, message: 'Invalid Password.' });
 
   const match = await user.comparePassword(password);
-  if (!match) return res.status(401).json({ success: false, message: 'Invalid credentials.' });
+  if (!match) return res.status(401).json({ success: false, message: 'Miss match Password.' });
 
   const token = generateToken(user._id);
   sendTokenCookie(res, token);
@@ -67,7 +67,7 @@ exports.googleLogin = async (req, res) => {
   } else {
     const referralCode = uuidv4().slice(0, 8).toUpperCase();
     user = await User.create({ name, email, googleId, avatar: picture, referralCode, isVerified: true });
-    await sendEmail({ to: user.email, subject: '🌸 Welcome to Beauty Master Academy!', template: 'welcome', data: { name } });
+    await sendEmail({ to: user.email, subject: '🌸 Welcome to Manisha Makeover Academy!', template: 'welcome', data: { name } });
   }
 
   const token = generateToken(user._id);
