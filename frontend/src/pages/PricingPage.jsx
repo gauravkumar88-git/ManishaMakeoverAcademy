@@ -8,15 +8,15 @@ import { FiCheck, FiTag } from 'react-icons/fi';
 
 const PLANS = [
   {
-    id: 'basic', name: 'Basic', price: 499, emoji: '🌸', color: '#E91E8C',
+    id: 'basic', name: 'Basic', price: 9, emoji: '🌸', color: '#E91E8C',
     features: ['Live Classes Access', 'PDF Notes Download', 'Attendance Tracking', 'Community Access', 'Basic Support'],
   },
   {
-    id: 'premium', name: 'Premium', price: 999, emoji: '💎', color: '#9C27B0', popular: true,
+    id: 'premium', name: 'Premium', price: 99, emoji: '💎', color: '#9C27B0', popular: true,
     features: ['Everything in Basic', 'Class Recordings', 'Premium Content Library', 'Priority Support', 'Exclusive Workshops'],
   },
   {
-    id: 'vip', name: 'VIP', price: 1999, emoji: '👑', color: '#F59E0B',
+    id: 'vip', name: 'VIP', price: 199, emoji: '👑', color: '#F59E0B',
     features: ['Everything in Premium', 'One-to-One Mentorship', 'Exclusive Live Sessions', 'Career Placement Help', 'Lifetime Access to Recordings'],
   },
 ];
