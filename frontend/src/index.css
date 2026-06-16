@@ -22,14 +22,14 @@
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: #0D0010;
-  color: #f1f1f1;
   overflow-x: hidden;
-}
-
-body.light-mode {
   background: #FFF0F6;
   color: #1a1a2e;
+}
+
+.dark body {
+  background: #0D0010;
+  color: #f1f1f1;
 }
 
 /* Scrollbar */
