@@ -47,13 +47,11 @@ export default function StudentClasses() {
 
 const handleJoin = async (cls) => {
   try {
-    console.log("Joining class:", cls._id);
-
     const res = await api.post(`/classes/${cls._id}/join`);
 
-    console.log("JOIN RESPONSE:", res.data);
+    console.log("MEET LINK:", res.data.meetLink);
 
-    window.open(res.data.meetLink, "_blank");
+    window.location.href = res.data.meetLink;
   } catch (err) {
     console.log("JOIN ERROR:", err.response?.data);
     toast.error(err.response?.data?.message || "Cannot join class");
