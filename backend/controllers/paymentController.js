@@ -17,6 +17,13 @@ const PLANS = {
 
 // @POST /api/payments/create-order
 exports.createOrder = async (req, res) => {
+
+  console.log("========== CREATE ORDER ==========");
+  console.log("USER:", req.user);
+  console.log("BODY:", req.body);
+  console.log("PLAN:", req.body.plan);
+  console.log("RAZORPAY_KEY_ID:", process.env.RAZORPAY_KEY_ID);
+
   const { plan, couponCode } = req.body;
   if (!PLANS[plan]) return res.status(400).json({ success: false, message: 'Invalid plan.' });
 
