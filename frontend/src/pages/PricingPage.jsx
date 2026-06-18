@@ -160,10 +160,7 @@ export default function PricingPage() {
 
   return (
     <div style={{ background: '#0D0010' }} className="min-h-screen pt-24 pb-20">
-      {/* Load Razorpay script */}
-      /* {!window.Razorpay && (
-        <script src="https://checkout.razorpay.com/v1/checkout.js" />
-      )} */
+    
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
