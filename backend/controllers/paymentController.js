@@ -51,12 +51,27 @@ console.log("RAZORPAY SECRET EXISTS:", !!process.env.RAZORPAY_KEY_SECRET);
     amount = Math.max(amount - discountAmount, 0);
   }
 
+ try {
+  console.log("FINAL AMOUNT:", amount);
+
   const order = await razorpay.orders.create({
     amount,
     currency: 'INR',
     receipt: `receipt_${Date.now()}`,
-    notes: { userId: req.user._id.toString(), plan },
+    notes: {
+      userId: req.user._id.toString(),
+      plan,
+    },
   });
+
+  console.log("RAZORPAY ORDER:", order);
+
+} catch (error) {
+  console.error("RAZORPAY FULL ERROR:");
+  console.error(error);
+  console.error(error.message);
+  throw error;
+}
 
   // Save pending payment
   const payment = await Payment.create({
