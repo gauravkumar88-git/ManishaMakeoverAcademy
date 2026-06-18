@@ -25,6 +25,9 @@ exports.createOrder = async (req, res) => {
   console.log("RAZORPAY_KEY_ID:", process.env.RAZORPAY_KEY_ID);
 
   const { plan, couponCode } = req.body;
+  console.log("PLAN DATA:", PLANS[plan]);
+console.log("RAZORPAY KEY:", process.env.RAZORPAY_KEY_ID);
+console.log("RAZORPAY SECRET EXISTS:", !!process.env.RAZORPAY_KEY_SECRET);
   if (!PLANS[plan]) return res.status(400).json({ success: false, message: 'Invalid plan.' });
 
   let amount = PLANS[plan].price;
