@@ -54,50 +54,109 @@ export default function PricingPage() {
   };
 
   const handleSubscribe = async (plan) => {
-    if (!isAuthenticated) { navigate('/login'); return; }
-    setProcessingPlan(plan.id);
+  if (!isAuthenticated) {
+    navigate('/login');
+    return;
+  }
 
-    try {
-      const orderRes = await api.post('/payments/create-order', { plan: plan.id, couponCode: coupon || undefined });
-      const { order, key, payment: paymentDbId } = orderRes.data;
+  setProcessingPlan(plan.id);
 
-      const options = {
-        key,
-        amount: order.amount,
-        currency: 'INR',
-        name: 'Beauty Master Academy',
-        description: `${plan.name} Plan - 30 Days`,
-        order_id: order.id,
-        prefill: { name: user?.name, email: user?.email, contact: user?.phone },
-        theme: { color: '#E91E8C' },
-        handler: async (response) => {
-          try {
-            await api.post('/payments/verify', {
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-              plan: plan.id,
-              paymentDbId,
-            });
-            toast.success('🎉 Subscription activated!');
-            navigate('/dashboard');
-          } catch { toast.error('Payment verification failed'); }
-        },
-        modal: { ondismiss: () => setProcessingPlan(null) },
-      };
+  try {
+    const orderRes = await api.post('/payments/create-order', {
+      plan: plan.id,
+      couponCode: coupon || undefined,
+    });
 
-      if (window.Razorpay) {
-        const rzp = new window.Razorpay(options);
-        rzp.open();
-      } else {
-        toast.error('Razorpay not loaded. Please refresh the page.');
-        setProcessingPlan(null);
-      }
-    } catch (err) {
-      toast.error(err.response?.data?.message || 'Payment initiation failed');
+    console.log('ORDER RESPONSE:', orderRes.data);
+
+    const { order, key, payment: paymentDbId } = orderRes.data;
+
+    console.log('ORDER:', order);
+    console.log('KEY:', key);
+    console.log('PAYMENT DB ID:', paymentDbId);
+
+    if (!key) {
+      toast.error('Razorpay Key Missing');
       setProcessingPlan(null);
+      return;
     }
-  };
+
+    if (!order?.id) {
+      toast.error('Order ID Missing');
+      setProcessingPlan(null);
+      return;
+    }
+
+    const options = {
+      key: key,
+      amount: order.amount,
+      currency: 'INR',
+      name: 'Manisha Makeover Academy',
+      description: `${plan.name} Plan - 30 Days`,
+      order_id: order.id,
+
+      prefill: {
+        name: user?.name || '',
+        email: user?.email || '',
+        contact: user?.phone || '',
+      },
+
+      theme: {
+        color: '#E91E8C',
+      },
+
+      handler: async function (response) {
+        try {
+          await api.post('/payments/verify', {
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature,
+            plan: plan.id,
+            paymentDbId,
+          });
+
+          toast.success('🎉 Subscription activated!');
+          navigate('/dashboard');
+        } catch (error) {
+          console.error('VERIFY ERROR:', error);
+          toast.error('Payment verification failed');
+        }
+      },
+
+      modal: {
+        ondismiss: function () {
+          setProcessingPlan(null);
+        },
+      },
+    };
+
+    console.log('RAZORPAY OPTIONS:', options);
+
+    if (!window.Razorpay) {
+      toast.error('Razorpay SDK not loaded');
+      setProcessingPlan(null);
+      return;
+    }
+
+    const rzp = new window.Razorpay(options);
+
+    rzp.on('payment.failed', function (response) {
+      console.log('PAYMENT FAILED:', response.error);
+      toast.error(response.error.description || 'Payment Failed');
+    });
+
+    rzp.open();
+  } catch (err) {
+    console.error('CREATE ORDER ERROR:', err);
+    console.error('SERVER RESPONSE:', err.response?.data);
+
+    toast.error(
+      err.response?.data?.message || 'Payment initiation failed'
+    );
+
+    setProcessingPlan(null);
+  }
+};
 
   return (
     <div style={{ background: '#0D0010' }} className="min-h-screen pt-24 pb-20">
