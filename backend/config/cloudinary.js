@@ -25,7 +25,8 @@ const pdfStorage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => ({
     folder: "beauty-master/notes",
-    resource_type: "auto",
+    resource_type: "raw",
+    format: "pdf",
     public_id: `${Date.now()}-${path.parse(file.originalname).name}`
   }),
 });
