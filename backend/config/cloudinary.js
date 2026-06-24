@@ -24,9 +24,9 @@ const pdfStorage = new CloudinaryStorage({
   params: async (req, file) => ({
     folder: "beauty-master/notes",
     resource_type: "raw",
-    public_id: `${Date.now()}-${file.originalname.replace(".pdf", "")}`
+    public_id: `${Date.now()}-${file.originalname}`
   }),
-})
+});
 
 // Storage for recordings
 const videoStorage = new CloudinaryStorage({
