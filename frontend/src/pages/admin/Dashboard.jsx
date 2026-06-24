@@ -77,12 +77,17 @@ export default function AdminDashboard() {
                 {recentPayments.map(p => (
                   <div key={p._id} className="flex items-center gap-3 px-5 py-3 hover:bg-white/3 transition-colors">
                     <img
-  src={s.avatar}
-  alt={s.name}
+  src={
+    p.userId?.avatar ||
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(
+      p.userId?.name || "User"
+    )}&background=9C27B0&color=fff&size=40`
+  }
+  alt={p.userId?.name || "User"}
   className="w-9 h-9 rounded-lg object-cover flex-shrink-0"
   onError={(e) => {
     e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-      s.name
+      p.userId?.name || "User"
     )}&background=9C27B0&color=fff&size=40`;
   }}
 />
