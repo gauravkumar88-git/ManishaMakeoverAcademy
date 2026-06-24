@@ -17,6 +17,7 @@ exports.getAllNotes = async (req, res) => {
 };
 
 exports.uploadNote = async (req, res) => {
+  console.log(req.file);
   console.log("FILE:", req.file);
 
   const { classId, title, description, type } = req.body;
