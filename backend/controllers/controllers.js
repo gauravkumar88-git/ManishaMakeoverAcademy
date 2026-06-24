@@ -39,13 +39,6 @@ exports.uploadNote = async (req, res) => {
     uploadedBy: req.user._id
   });
 
-  res.status(201).json({
-    success: true,
-    note
-  });
-
-
-
   // Notify students
   const cls = await Class.findById(classId);
   await Notification.create({
