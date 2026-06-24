@@ -19,12 +19,14 @@ const imageStorage = new CloudinaryStorage({
 });
 
 // Storage for PDFs (notes)
+const path = require("path");
+
 const pdfStorage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => ({
     folder: "beauty-master/notes",
     resource_type: "auto",
-    public_id: `${Date.now()}-${file.originalname}`
+    public_id: `${Date.now()}-${path.parse(file.originalname).name}`
   }),
 });
 
