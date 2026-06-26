@@ -10,8 +10,14 @@ export default function AdminNotes() {
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(false);
-  const [form, setForm] = useState({ classId: '', title: '', description: '', type: 'notes' });
-  const [pdfFile, setPdfFile] = useState(null);
+const [form, setForm] = useState({
+  classId: '',
+  title: '',
+  description: '',
+  type: 'notes',
+  pdfUrl: ''
+});
+  // const [pdfFile, setPdfFile] = useState(null);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -24,24 +30,44 @@ export default function AdminNotes() {
       setLoading(false);
     });
   }, []);
+const handleUpload = async (e) => {
+  e.preventDefault();
 
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    if (!pdfFile) { toast.error('Please select a PDF file'); return; }
-    setSaving(true);
-    const fd = new FormData();
-    Object.entries(form).forEach(([k, v]) => fd.append(k, v));
-    fd.append('pdf', pdfFile);
-    try {
-      const res = await api.post('/notes', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
-      setNotes(prev => [res.data.note, ...prev]);
-      toast.success('Notes uploaded!');
-      setModal(false);
-      setForm({ classId: '', title: '', description: '', type: 'notes' });
-      setPdfFile(null);
-    } catch { toast.error('Upload failed'); }
-    finally { setSaving(false); }
-  };
+  setSaving(true);
+
+  try {
+    let data = { ...form };
+
+    // Convert Google Drive share link to preview link
+    const match = data.pdfUrl.match(/\/d\/([^/]+)/);
+
+    if (match) {
+      data.pdfUrl = `https://drive.google.com/file/d/${match[1]}/preview`;
+    }
+
+    const res = await api.post("/notes", data);
+
+    setNotes(prev => [res.data.note, ...prev]);
+
+    toast.success("Notes uploaded!");
+
+    setModal(false);
+
+    setForm({
+      classId: "",
+      title: "",
+      description: "",
+      type: "notes",
+      pdfUrl: ""
+    });
+
+  } catch (err) {
+    console.error(err);
+    toast.error("Failed to add notes");
+  } finally {
+    setSaving(false);
+  }
+};
 
   const handleDelete = async (id) => {
     if (!confirm('Delete this note?')) return;
@@ -144,14 +170,24 @@ export default function AdminNotes() {
                   </select>
                 </div>
                 <div>
-                  <label className="text-gray-400 text-xs mb-1 block">PDF File *</label>
-                  <div className="border-2 border-dashed border-white/20 rounded-xl p-4 text-center hover:border-pink-500/40 transition-colors cursor-pointer"
-                    onClick={() => document.getElementById('pdf-input').click()}>
-                    <FiUpload className="mx-auto text-gray-400 mb-2" size={24} />
-                    <p className="text-gray-400 text-sm">{pdfFile ? pdfFile.name : 'Click to upload PDF'}</p>
-                    <input id="pdf-input" type="file" accept=".pdf" onChange={e => setPdfFile(e.target.files[0])} className="hidden" />
-                  </div>
-                </div>
+  <label className="text-gray-400 text-xs mb-1 block">
+    Google Drive Link *
+  </label>
+
+  <input
+    type="url"
+    value={form.pdfUrl}
+    onChange={(e) =>
+      setForm({
+        ...form,
+        pdfUrl: e.target.value
+      })
+    }
+    className="input-beauty"
+    placeholder="Paste Google Drive link"
+    required
+  />
+</div>
                 <div className="flex gap-3 pt-1">
                   <button type="button" onClick={() => setModal(false)} className="flex-1 btn-outline py-2.5 text-sm">Cancel</button>
                   <button type="submit" disabled={saving} className="flex-1 btn-primary py-2.5 text-sm">
