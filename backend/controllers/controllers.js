@@ -6,73 +6,94 @@ const { v4: uuidv4 } = require('uuid');
 const QRCode = require('qrcode');
 
 // Notes
+// Notes
 exports.getNotesByClass = async (req, res) => {
-  const notes = await Note.find({ classId: req.params.classId }).sort({ createdAt: -1 });
-  res.json({ success: true, notes });
+  const notes = await Note.find({ classId: req.params.classId })
+    .sort({ createdAt: -1 });
+
+  res.json({
+    success: true,
+    notes,
+  });
 };
 
 exports.getAllNotes = async (req, res) => {
-  const notes = await Note.find().populate('classId', 'title date').sort({ createdAt: -1 });
-  res.json({ success: true, notes });
+  const notes = await Note.find()
+    .populate("classId", "title date")
+    .sort({ createdAt: -1 });
+
+  res.json({
+    success: true,
+    notes,
+  });
 };
 
 exports.uploadNote = async (req, res) => {
-  const { classId, title, description, type, pdfUrl } = req.body;
+  try {
+    const { classId, title, description, type, pdfUrl } = req.body;
 
-  if (!pdfUrl) {
-    return res.status(400).json({
+    if (!pdfUrl) {
+      return res.status(400).json({
+        success: false,
+        message: "Google Drive link is required",
+      });
+    }
+
+    const note = await Note.create({
+      classId,
+      title,
+      description,
+      pdfUrl,
+      type: type || "notes",
+      uploadedBy: req.user._id,
+    });
+
+    const cls = await Class.findById(classId);
+
+    await Notification.create({
+      isGlobal: true,
+      title: `New Notes: ${title} 📄`,
+      message: `Notes for "${cls?.title || "class"}" have been uploaded.`,
+      type: "info",
+      link: `/notes/${note._id}`,
+    });
+
+    return res.status(201).json({
+      success: true,
+      note,
+    });
+  } catch (error) {
+    console.error("Upload Note Error:", error);
+
+    return res.status(500).json({
       success: false,
-      message: "Google Drive link is required"
+      message: "Failed to upload note",
     });
   }
-
-  const note = await Note.create({
-    classId,
-    title,
-    description,
-    pdfUrl,
-    type: type || "notes",
-    uploadedBy: req.user._id
-  });
-
-  // Notify students
-  const cls = await Class.findById(classId);
-
-  await Notification.create({
-    isGlobal: true,
-    title: `New Notes: ${title} 📄`,
-    message: `Notes for "${cls?.title || "class"}" have been uploaded.`,
-    type: "info",
-    link: `/notes/${note._id}`,
-  });
-
-  return res.status(201).json({
-    success: true,
-    note
-  });
-};
-
-  // Notify students
-  const cls = await Class.findById(classId);
-  await Notification.create({
-    isGlobal: true,
-    title: `New Notes: ${title} 📄`,
-    message: `Notes for "${cls?.title || 'class'}" have been uploaded.`,
-    type: 'info',
-    link: `/notes/${note._id}`,
-  });
-
-  res.status(201).json({ success: true, note });
 };
 
 exports.deleteNote = async (req, res) => {
   await Note.findByIdAndDelete(req.params.id);
-  res.json({ success: true, message: 'Note deleted.' });
+
+  res.json({
+    success: true,
+    message: "Note deleted.",
+  });
 };
 
 exports.trackDownload = async (req, res) => {
-  await Note.findByIdAndUpdate(req.params.id, { $inc: { downloads: 1 } });
-  res.json({ success: true });
+  await Note.findByIdAndUpdate(
+    req.params.id,
+    {
+      $inc: {
+        downloads: 1,
+      },
+    }
+  );
+
+  res.json({
+    success: true,
+  });
 };
 
 // ─── Attendance Controller ────────────────────────────────────────────────────
