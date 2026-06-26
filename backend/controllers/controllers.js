@@ -17,15 +17,12 @@ exports.getAllNotes = async (req, res) => {
 };
 
 exports.uploadNote = async (req, res) => {
-  console.log(req.file);
-  console.log("FILE:", req.file);
+  const { classId, title, description, type, pdfUrl } = req.body;
 
-  const { classId, title, description, type } = req.body;
-
-  if (!req.file) {
+  if (!pdfUrl) {
     return res.status(400).json({
       success: false,
-      message: "PDF required"
+      message: "Google Drive link is required"
     });
   }
 
@@ -33,11 +30,27 @@ exports.uploadNote = async (req, res) => {
     classId,
     title,
     description,
-    pdfUrl: req.file.path,
-    pdfPublicId: req.file.filename,
+    pdfUrl,
     type: type || "notes",
     uploadedBy: req.user._id
   });
+
+  // Notify students
+  const cls = await Class.findById(classId);
+
+  await Notification.create({
+    isGlobal: true,
+    title: `New Notes: ${title} 📄`,
+    message: `Notes for "${cls?.title || "class"}" have been uploaded.`,
+    type: "info",
+    link: `/notes/${note._id}`,
+  });
+
+  return res.status(201).json({
+    success: true,
+    note
+  });
+};
 
   // Notify students
   const cls = await Class.findById(classId);
