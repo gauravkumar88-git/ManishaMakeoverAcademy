@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
-import { getMe } from './store/slices/authSlice';
+ import { getMe, setInitialized } from "./store/slices/authSlice";
 import BuyClass from "./pages/student/BuyClass";
 // Layout
 import Navbar from './components/layout/Navbar';
@@ -71,11 +71,15 @@ function App() {
   const dispatch = useDispatch();
   const { darkMode } = useSelector(state => state.ui);
 
-  useEffect(() => {
+ 
+
+useEffect(() => {
   const token = localStorage.getItem("token");
 
   if (token) {
     dispatch(getMe());
+  } else {
+    dispatch(setInitialized());
   }
 }, [dispatch]);
 
