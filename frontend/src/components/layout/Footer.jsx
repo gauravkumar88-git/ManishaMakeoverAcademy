@@ -61,11 +61,11 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center gap-3 text-gray-400 text-sm">
                 <FiMail size={16} className="text-pink-400 flex-shrink-0" />
-                <span>manishamakeoveracademy740@gmail.com</span>
+                <span>manishamakeover.academy047@gmail.com</span>
               </li>
               <li className="flex items-center gap-3 text-gray-400 text-sm">
                 <FiPhone size={16} className="text-pink-400 flex-shrink-0" />
-                <span>+91 9012997494</span>
+                <span>+91 XXXXXXXXXX</span>
               </li>
               <li className="flex items-start gap-3 text-gray-400 text-sm">
                 <FiMapPin size={16} className="text-pink-400 flex-shrink-0 mt-0.5" />

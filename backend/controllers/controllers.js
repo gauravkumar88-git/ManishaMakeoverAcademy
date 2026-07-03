@@ -21,22 +21,14 @@ exports.uploadNote = async (req, res) => {
 
   const { classId, title, description, type } = req.body;
 
-  if (!req.file) {
-    return res.status(400).json({
-      success: false,
-      message: "PDF required"
-    });
-  }
-
-  const note = await Note.create({
-    classId,
-    title,
-    description,
-    pdfUrl: req.file.path,
-    pdfPublicId: req.file.filename,
-    type: type || "notes",
-    uploadedBy: req.user._id
-  });
+const note = await Note.create({
+  classId,
+  title,
+  description,
+  pdfUrl: req.body.pdfUrl,
+  type: type || 'notes',
+  uploadedBy: req.user._id
+});
 
   res.status(201).json({
     success: true,

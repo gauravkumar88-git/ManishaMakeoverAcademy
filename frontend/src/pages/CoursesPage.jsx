@@ -7,18 +7,58 @@ import { FiCalendar, FiClock, FiUser, FiFilter, FiPlay } from 'react-icons/fi';
 const CATEGORIES = ['all', 'bridal', 'skincare', 'hair', 'nail', 'makeup', 'eyebrow', 'mehndi'];
 
 export default function CoursesPage() {
+  const [purchasedClasses, setPurchasedClasses] = useState([]);
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState('all');
   const [status, setStatus] = useState('all');
 
   useEffect(() => {
-    const params = {};
-    if (category !== 'all') params.category = category;
-    if (status !== 'all') params.status = status;
-    const q = new URLSearchParams({ ...params, limit: 30 }).toString();
-    api.get(`/classes?${q}`).then(r => { setClasses(r.data.classes || []); setLoading(false); });
-  }, [category, status]);
+
+  const fetchData = async () => {
+
+    setLoading(true);
+
+    try {
+
+      const params = {};
+
+      if (category !== "all") params.category = category;
+      if (status !== "all") params.status = status;
+
+      const q = new URLSearchParams({
+        ...params,
+        limit: 30,
+      }).toString();
+
+      const [classRes, purchaseRes] = await Promise.all([
+        api.get(`/classes?${q}`),
+        api.get("/class-purchase/my"),
+      ]);
+
+      setClasses(classRes.data.classes || []);
+
+      setPurchasedClasses(
+        purchaseRes.data.purchases.map(item =>
+          item.classId.toString()
+        )
+      );
+
+    } catch (err) {
+
+      console.log(err);
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
+  };
+
+  fetchData();
+
+}, [category, status]);
 
   return (
     <div style={{ background: '#0D0010' }} className="min-h-screen pt-24 pb-20">
@@ -96,14 +136,94 @@ export default function CoursesPage() {
                     <span className="flex items-center gap-1"><FiCalendar size={12} /> {new Date(cls.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</span>
                     <span className="flex items-center gap-1"><FiClock size={12} /> {cls.time}</span>
                   </div>
-                 <Link
-  to="/checkout/basic"
-  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white transition-all"
-  style={{ background: 'linear-gradient(135deg,#E91E8C,#9C27B0)' }}
->
-  <FiPlay size={14} />
-  Buy Course
-</Link>
+                 {cls.accessType === "individual" ? (
+
+  purchasedClasses.includes(cls._id.toString()) ? (
+
+    cls.status === "live" ? (
+      <button
+        onClick={() => navigate("/my-classes")}
+        className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white"
+        style={{
+          background: "linear-gradient(135deg,#E91E8C,#9C27B0)",
+        }}
+      >
+        <FiPlay size={14} />
+        Join Live Class
+      </button>
+
+    ) : cls.status === "upcoming" ? (
+
+      <button
+        onClick={() => navigate("/my-classes")}
+        className="w-full py-2.5 rounded-xl text-sm font-semibold bg-blue-600 text-white"
+      >
+        Upcoming Class
+      </button>
+
+    ) : cls.status === "completed" ? (
+
+      cls.recordingUrl ? (
+        <a
+          href={cls.recordingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold bg-purple-600 text-white"
+        >
+          <FiPlay size={14} />
+          Watch Recording
+        </a>
+      ) : (
+        <button
+          disabled
+          className="w-full py-2.5 rounded-xl text-sm font-semibold bg-gray-600 text-white"
+        >
+          Purchased
+        </button>
+      )
+
+    ) : (
+
+      <button
+        disabled
+        className="w-full py-2.5 rounded-xl text-sm font-semibold bg-gray-600 text-white"
+      >
+        Purchased
+      </button>
+
+    )
+
+  ) : (
+
+    <Link
+      to={`/buy-class/${cls._id}`}
+      className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white"
+      style={{
+        background: "linear-gradient(135deg,#22c55e,#16a34a)",
+      }}
+    >
+      <FiPlay size={14} />
+      Buy Now ₹{cls.price}
+    </Link>
+
+  )
+
+) : (
+
+  <Link
+    to="/pricing"
+    className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white"
+    style={{
+      background: "linear-gradient(135deg,#E91E8C,#9C27B0)",
+    }}
+  >
+    <FiPlay size={14} />
+    View Plans
+  </Link>
+
+
+
+)}
                 </div>
               </motion.div>
             ))}

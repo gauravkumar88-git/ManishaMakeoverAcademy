@@ -12,7 +12,7 @@ const TermsConditions = () => {
           </h1>
 
           <p className="text-pink-200 text-lg">
-            Beauty Master Academy
+             Manisha Makeover Academy
           </p>
 
           <div className="flex justify-center mt-6">
@@ -32,7 +32,7 @@ const TermsConditions = () => {
           </p>
 
           <p className="text-gray-300 leading-relaxed mb-8">
-            Welcome to <strong className="text-pink-400">Beauty Master Academy</strong>.
+            Welcome to <strong className="text-pink-400">Manisha Makeover Academy</strong>.
             By accessing our website, enrolling in courses, or using any of our
             services, you agree to comply with the following Terms of Service.
           </p>
@@ -72,7 +72,7 @@ const TermsConditions = () => {
 
             <p className="text-gray-300 leading-relaxed">
               All payments are processed through secure third-party payment
-              gateways such as Razorpay. Beauty Master Academy is not responsible
+              gateways such as Razorpay. Manisha Makeover Academy is not responsible
               for payment gateway downtime or banking issues beyond our control.
             </p>
           </section>
@@ -85,8 +85,8 @@ const TermsConditions = () => {
 
             <p className="text-gray-300 leading-relaxed">
               Certificates are issued only after successful completion of course
-              requirements. Certificates remain the property of Beauty Master
-              Academy and may be verified through our platform.
+              requirements. Certificates remain the property of Manisha Makeover Academy
+               and may be verified through our platform.
             </p>
           </section>
 
@@ -98,7 +98,7 @@ const TermsConditions = () => {
 
             <p className="text-gray-300 leading-relaxed">
               All course materials, videos, notes, branding, logos, and website
-              content belong exclusively to Beauty Master Academy. Unauthorized
+              content belong exclusively to Manisha Makeover Academy. Unauthorized
               copying, sharing, recording, distribution, or resale is strictly
               prohibited.
             </p>
@@ -125,7 +125,7 @@ const TermsConditions = () => {
             </h2>
 
             <p className="text-gray-300 leading-relaxed">
-              Beauty Master Academy shall not be liable for indirect, incidental,
+             Manisha Makeover Academy shall not be liable for indirect, incidental,
               or consequential damages arising from the use of our platform,
               courses, or services.
             </p>
@@ -152,7 +152,7 @@ const TermsConditions = () => {
 
             <div className="bg-pink-500/10 border border-pink-500/20 rounded-2xl p-6 mt-4">
               <p className="text-white font-semibold text-lg mb-3">
-                Beauty Master Academy
+                Manisha Makeover Academy
               </p>
 
               <p className="text-gray-300">
@@ -160,18 +160,18 @@ const TermsConditions = () => {
               </p>
 
               <p className="text-gray-300">
-                Phone: +91 8860011621
+                Phone: +91 XXXXXXXXXX
               </p>
 
               <p className="text-gray-300">
-                Website: http://localhost:5173
+                Website: https://manisha-makeover-academy.vercel.app/
               </p>
             </div>
           </section>
 
           <div className="mt-10 text-center border-t border-pink-500/20 pt-6">
             <p className="text-sm text-gray-400">
-              © {new Date().getFullYear()} Beauty Master Academy.
+              © {new Date().getFullYear()}  Manisha Makeover Academy.
               All Rights Reserved.
             </p>
           </div>

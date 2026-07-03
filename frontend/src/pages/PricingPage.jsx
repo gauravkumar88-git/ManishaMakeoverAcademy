@@ -8,24 +8,24 @@ import { FiCheck, FiTag } from 'react-icons/fi';
 
 const PLANS = [
   {
-    id: 'basic', name: 'Basic', price: 9, emoji: '🌸', color: '#E91E8C',
+    id: 'basic', name: 'Basic', price: 299, emoji: '', color: '#E91E8C',
     features: ['Live Classes Access', 'PDF Notes Download', 'Attendance Tracking', 'Community Access', 'Basic Support'],
   },
   {
-    id: 'premium', name: 'Premium', price: 99, emoji: '💎', color: '#9C27B0', popular: true,
+    id: 'premium', name: 'Premium', price: 499, emoji: '', color: '#9C27B0', popular: true,
     features: ['Everything in Basic', 'Class Recordings', 'Premium Content Library', 'Priority Support', 'Exclusive Workshops'],
   },
   {
-    id: 'vip', name: 'VIP', price: 199, emoji: '👑', color: '#F59E0B',
+    id: 'vip', name: 'VIP', price: 699, emoji: '', color: '#F59E0B',
     features: ['Everything in Premium', 'One-to-One Mentorship', 'Exclusive Live Sessions', 'Career Placement Help', 'Lifetime Access to Recordings'],
   },
 ];
 
 const FAQ = [
-  { q: 'Can I cancel anytime?', a: 'Yes, you can cancel your subscription anytime. Your access continues until the end of the billing period.' },
+  { q: 'Can I cancel anytime?', a: 'No, you can cancel your subscription anytime. Your access continues until the end of the billing period.' },
   { q: 'Are the classes pre-recorded or live?', a: 'All classes are conducted live via Google Meet with real-time interaction with instructors.' },
   { q: 'What payment methods are accepted?', a: 'We accept all UPI apps, credit/debit cards, net banking, and wallets via Razorpay.' },
-  { q: 'Is there a refund policy?', a: 'We offer a 7-day money-back guarantee if you\'re not satisfied with the course content.' },
+  { q: 'Is there a refund policy?', a: 'No,We does not offer a money-back guarantee if you\'re not satisfied with the course content.' },
   { q: 'Can I upgrade my plan later?', a: 'Absolutely! You can upgrade your plan anytime and enjoy enhanced features immediately.' },
 ];
 
@@ -167,7 +167,7 @@ export default function PricingPage() {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
           <span className="badge mb-4">Subscription Plans</span>
           <h1 className="section-title text-white mb-4">Invest in Your <span className="gradient-text">Beauty Career</span></h1>
-          <p className="text-gray-400 max-w-xl mx-auto">All plans include a 7-day money-back guarantee. No hidden fees. Cancel anytime.</p>
+          <p className="text-gray-400 max-w-xl mx-auto">All plans include no money-back guarantee. No hidden fees.</p>
         </motion.div>
 
         {/* Coupon */}

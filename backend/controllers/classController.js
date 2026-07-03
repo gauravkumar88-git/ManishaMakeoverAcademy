@@ -1,4 +1,5 @@
 const Class = require('../models/Class');
+const ClassPurchase = require("../models/ClassPurchase");
 const { Attendance, Notification } = require('../models/index');
 
 // @GET /api/classes
@@ -31,17 +32,19 @@ exports.createClass = async (req, res) => {
     console.log("FILE:", req.file);
 
     const {
-      title,
-      description,
-      instructor,
-      category,
-      date,
-      time,
-      duration,
-      meetLink,
-      requiredPlan,
-      tags
-    } = req.body;
+  title,
+  description,
+  instructor,
+  category,
+  date,
+  time,
+  duration,
+  meetLink,
+  requiredPlan,
+  accessType,
+  price,
+  tags
+} = req.body;
 
     const thumbnail = req.file ? req.file.path : '';
 
@@ -60,19 +63,23 @@ exports.createClass = async (req, res) => {
       }
     }
 
-    const cls = await Class.create({
-      title,
-      description,
-      instructor,
-      category,
-      date,
-      time,
-      duration,
-      meetLink,
-      requiredPlan,
-      tags: parsedTags,
-      thumbnail
-    });
+ const cls = await Class.create({
+  title,
+  description,
+  instructor,
+  category,
+  date,
+  time,
+  duration,
+  meetLink,
+
+  accessType,
+  price,
+
+  requiredPlan,
+  tags: parsedTags,
+  thumbnail
+});
 
     try {
       await Notification.create({
@@ -176,38 +183,7 @@ exports.deleteClass = async (req, res) => {
   res.json({ success: true, message: 'Class deleted.' });
 };
 
-// @POST /api/classes/:id/join  (subscribe required)
-// exports.joinClass = async (req, res) => {
-//   const cls = await Class.findById(req.params.id);
-//   if (!cls) return res.status(404).json({ success: false, message: 'Class not found.' });
 
-//   // Check subscription plan
-//   const planOrder = { basic: 1, premium: 2, vip: 3 };
-//   const userPlanLevel = planOrder[req.user.subscriptionPlan] || 0;
-//   const requiredLevel = planOrder[cls.requiredPlan] || 1;
-
-//   if (!req.user.isSubscriptionValid()) {
-//     return res.status(403).json({ success: false, message: 'Active subscription required.' });
-//   }
-//   if (userPlanLevel < requiredLevel) {
-//     return res.status(403).json({ success: false, message: `This class requires ${cls.requiredPlan} plan or higher.` });
-//   }
-
-//   // Record attendance
-//   await Attendance.findOneAndUpdate(
-//     { userId: req.user._id, classId: cls._id },
-//     { userId: req.user._id, classId: cls._id, joinTime: new Date(), status: 'present' },
-//     { upsert: true, new: true }
-//   );
-
-//   // Add to enrolled if not already
-//   if (!cls.enrolledStudents.includes(req.user._id)) {
-//     cls.enrolledStudents.push(req.user._id);
-//     await cls.save();
-//   }
-
-//   res.json({ success: true, meetLink: cls.meetLink });
-// };
 
 // @POST /api/classes/:id/join
 exports.joinClass = async (req, res) => {
@@ -217,68 +193,76 @@ exports.joinClass = async (req, res) => {
     if (!cls) {
       return res.status(404).json({
         success: false,
-        message: 'Class not found.'
+        message: "Class not found.",
       });
     }
 
-    console.log("========== JOIN CLASS ==========");
-    console.log("USER ID:", req.user._id);
-    console.log("PLAN:", req.user.subscriptionPlan);
-    console.log("ACTIVE:", req.user.subscriptionActive);
-    console.log("EXPIRY:", req.user.subscriptionExpiry);
-    console.log("VALID:", req.user.isSubscriptionValid());
-    console.log("CLASS REQUIRED PLAN:", cls.requiredPlan);
-    console.log("================================");
-
-    // Check subscription
-    if (!req.user.isSubscriptionValid()) {
-      return res.status(403).json({
-        success: false,
-        message: 'Active subscription required.'
+    // ===== Individual purchased class =====
+    if (cls.accessType === "individual") {
+      const purchase = await ClassPurchase.findOne({
+        userId: req.user._id,
+        classId: cls._id,
+        status: "paid",
       });
+
+      if (!purchase) {
+        return res.status(403).json({
+          success: false,
+          message: "Please purchase this class first.",
+        });
+      }
     }
 
-    // Check plan access
-    const planOrder = {
-      basic: 1,
-      premium: 2,
-      vip: 3
-    };
+    // ===== Batch subscription class =====
+    else {
+      if (!req.user.isSubscriptionValid()) {
+        return res.status(403).json({
+          success: false,
+          message: "Active subscription required.",
+        });
+      }
 
-    const userPlanLevel =
-      planOrder[req.user.subscriptionPlan] || 0;
+      const planOrder = {
+        basic: 1,
+        premium: 2,
+        vip: 3,
+      };
 
-    const requiredLevel =
-      planOrder[cls.requiredPlan] || 1;
+      const userPlanLevel =
+        planOrder[req.user.subscriptionPlan] || 0;
 
-    if (userPlanLevel < requiredLevel) {
-      return res.status(403).json({
-        success: false,
-        message: `This class requires ${cls.requiredPlan} plan or higher.`
-      });
+      const requiredLevel =
+        planOrder[cls.requiredPlan] || 1;
+
+      if (userPlanLevel < requiredLevel) {
+        return res.status(403).json({
+          success: false,
+          message: `This class requires ${cls.requiredPlan} plan or higher.`,
+        });
+      }
     }
 
     // Attendance
     await Attendance.findOneAndUpdate(
       {
         userId: req.user._id,
-        classId: cls._id
+        classId: cls._id,
       },
       {
         userId: req.user._id,
         classId: cls._id,
         joinTime: new Date(),
-        status: 'present'
+        status: "present",
       },
       {
         upsert: true,
-        new: true
+        new: true,
       }
     );
 
-    // Add enrolled student
+    // Enroll user
     const alreadyJoined = cls.enrolledStudents.some(
-      id => id.toString() === req.user._id.toString()
+      (id) => id.toString() === req.user._id.toString()
     );
 
     if (!alreadyJoined) {
@@ -288,15 +272,15 @@ exports.joinClass = async (req, res) => {
 
     return res.json({
       success: true,
-      meetLink: cls.meetLink
+      meetLink: cls.meetLink,
     });
 
   } catch (error) {
-    console.error("JOIN CLASS ERROR:", error);
+    console.error(error);
 
     return res.status(500).json({
       success: false,
-      message: error.message
+      message: error.message,
     });
   }
 };

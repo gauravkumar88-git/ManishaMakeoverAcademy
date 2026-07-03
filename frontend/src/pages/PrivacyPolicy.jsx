@@ -12,7 +12,7 @@ const PrivacyPolicy = () => {
           </h1>
 
           <p className="text-pink-200 text-lg">
-            Beauty Master Academy
+            Manisha Makeover Academy.
           </p>
 
           <div className="flex justify-center mt-6">
@@ -28,11 +28,11 @@ const PrivacyPolicy = () => {
         <div className="bg-white/5 backdrop-blur-lg border border-pink-500/20 rounded-3xl p-8 md:p-12 shadow-2xl">
 
           <p className="text-pink-200 mb-6">
-            Last Updated: August 2026
+            Last Updated: August 2025
           </p>
 
           <p className="text-gray-300 leading-relaxed mb-8">
-            Welcome to <strong className="text-pink-400">Beauty Master Academy</strong>.
+            Welcome to <strong className="text-pink-400">Manisha Makeover Academy</strong>.
             We are committed to protecting your privacy and ensuring that your
             personal information remains secure. This Privacy Policy explains
             how we collect, use, store, and protect your information when you
@@ -109,7 +109,7 @@ const PrivacyPolicy = () => {
             </h2>
 
             <p className="text-gray-300 leading-relaxed">
-              Beauty Master Academy may use trusted services including Google
+              Manisha Makeover Academy may use trusted services including Google
               OAuth, Cloudinary, MongoDB Atlas, Razorpay, and email service
               providers to deliver platform functionality. These providers have
               their own privacy policies regarding data usage.
@@ -151,11 +151,11 @@ const PrivacyPolicy = () => {
 
             <div className="bg-pink-500/10 border border-pink-500/20 rounded-2xl p-6 mt-4">
               <p className="text-white font-semibold text-lg mb-3">
-                Beauty Master Academy
+                Manisha Makeover Academy
               </p>
 
               <p className="text-gray-300">
-                Email: manishamakeoveracademy740@gmail.com
+                Email: manishamakeover.academy740@gmail.com
               </p>
 
               <p className="text-gray-300">
@@ -163,7 +163,7 @@ const PrivacyPolicy = () => {
               </p>
 
               <p className="text-gray-300">
-                Website: https://yourdomain.com
+                Website: https://manisha-makeover-academy.vercel.app/
               </p>
             </div>
           </section>
@@ -171,7 +171,7 @@ const PrivacyPolicy = () => {
           {/* Footer */}
           <div className="mt-10 text-center border-t border-pink-500/20 pt-6">
             <p className="text-sm text-gray-400">
-              © {new Date().getFullYear()} Beauty Master Academy.
+              © {new Date().getFullYear()} Manisha Makeover Academy.
               All Rights Reserved.
             </p>
           </div>

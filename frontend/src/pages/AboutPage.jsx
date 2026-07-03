@@ -10,11 +10,11 @@ const team = [
 ];
 
 const milestones = [
-  { year: '2020', event: 'Beauty Master Academy founded' },
-  { year: '2021', event: 'Reached 500 students' },
-  { year: '2022', event: 'Launched live online classes via Google Meet' },
-  { year: '2023', event: '2000+ certificates issued' },
-  { year: '2024', event: '5000+ students trained across India' },
+  { year: '2022', event: 'Manisha Makeover Academy founded' },
+  { year: '2023', event: 'Reached 100 students' },
+  { year: '2024', event: 'Launched live online classes via Google Meet' },
+  { year: '2025', event: '500+ certificates issued' },
+  { year: '2026', event: '800+ students trained across India' },
 ];
 
 const values = [
@@ -32,9 +32,9 @@ export default function AboutPage() {
         <div className="orb w-80 h-80 bg-pink-600 -top-20 left-1/2 -translate-x-1/2" style={{ opacity: 0.1 }} />
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="relative max-w-3xl mx-auto">
           <span className="badge mb-4">Our Story</span>
-          <h1 className="section-title text-white mb-6">Empowering Beauty <span className="gradient-text">Professionals</span> Since 2020</h1>
+          <h1 className="section-title text-white mb-6">Empowering Beauty <span className="gradient-text">Professionals</span> Since 2022</h1>
           <p className="text-gray-400 text-lg leading-relaxed">
-            Beauty Master Academy was born from a simple belief — every person who loves beauty deserves access to world-class training, regardless of where they live. We started as a small studio in Delhi and have grown into India's most trusted online beauty education platform.
+            Manisha Makeover Academy was born from a simple belief — every person who loves beauty deserves access to world-class training, regardless of where they live. We started as a small studio in Delhi and have grown into India's most trusted online beauty education platform.
           </p>
         </motion.div>
       </section>

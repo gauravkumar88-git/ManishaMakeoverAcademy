@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useDispatch, useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 import { getMe } from './store/slices/authSlice';
-
+import BuyClass from "./pages/student/BuyClass";
 // Layout
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -52,19 +52,32 @@ const ProtectedRoute = ({ children, adminOnly = false }) => {
 };
 
 const PublicRoute = ({ children }) => {
-  const { isAuthenticated, initialized } = useSelector(state => state.auth);
+  const { isAuthenticated, initialized, user } = useSelector(state => state.auth);
+
   if (!initialized) return null;
-  if (isAuthenticated) return <Navigate to="/dashboard" replace />;
+
+  if (isAuthenticated) {
+    return (
+      <Navigate
+        to={user?.role === "admin" ? "/admin" : "/"}
+        replace
+      />
+    );
+  }
+
   return children;
 };
-
 function App() {
   const dispatch = useDispatch();
   const { darkMode } = useSelector(state => state.ui);
 
   useEffect(() => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
     dispatch(getMe());
-  }, [dispatch]);
+  }
+}, [dispatch]);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
@@ -109,8 +122,8 @@ function App() {
           <Route path="/certificates" element={<ProtectedRoute><StudentCertificates /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><StudentProfile /></ProtectedRoute>} />
           <Route path="/payments" element={<ProtectedRoute><StudentPayments /></ProtectedRoute>} />
-          <Route path="/checkout/:plan" element={<CheckoutPage />}
-/>
+          <Route path="/checkout/:plan" element={<CheckoutPage />}/>
+          <Route path="/buy-class/:id" element={ <ProtectedRoute><BuyClass /></ProtectedRoute> }/>
 
           {/* Admin Routes */}
           <Route path="/admin" element={<ProtectedRoute adminOnly><AdminDashboard /></ProtectedRoute>} />

@@ -12,7 +12,7 @@ const RefundPolicy = () => {
           </h1>
 
           <p className="text-pink-200 text-lg">
-            Beauty Master Academy
+             Manisha Makeover Academy
           </p>
 
           <div className="flex justify-center mt-6">
@@ -34,7 +34,7 @@ const RefundPolicy = () => {
           <p className="text-gray-300 leading-relaxed mb-8">
             Thank you for choosing{" "}
             <span className="text-pink-400 font-semibold">
-              Beauty Master Academy
+               Manisha Makeover Academy
             </span>.
             Please read our refund policy carefully before purchasing any
             course, training program, workshop, or educational service.
@@ -47,7 +47,7 @@ const RefundPolicy = () => {
             </h2>
 
             <p className="text-gray-300 leading-relaxed">
-              All course purchases made through Beauty Master Academy are final.
+              All course purchases made through  Manisha Makeover Academy are final.
               Once payment is successfully completed and enrollment is confirmed,
               no refunds, cancellations, or exchanges will be provided.
             </p>
@@ -116,11 +116,11 @@ const RefundPolicy = () => {
 
             <div className="bg-pink-500/10 border border-pink-500/20 rounded-2xl p-6 mt-4">
               <p className="text-white font-semibold text-lg mb-3">
-                Beauty Master Academy
+                 Manisha Makeover Academy
               </p>
 
               <p className="text-gray-300">
-                Email: manishamakeoveracademy740@gmail.com
+                Email: manishamakeover.academy047@gmail.com
               </p>
 
               <p className="text-gray-300">
@@ -128,7 +128,7 @@ const RefundPolicy = () => {
               </p>
 
               <p className="text-gray-300">
-                Website: https://yourdomain.com
+                Website: https://manisha-makeover-academy.vercel.app/
               </p>
             </div>
           </section>
@@ -136,7 +136,7 @@ const RefundPolicy = () => {
           {/* Footer */}
           <div className="mt-10 text-center border-t border-pink-500/20 pt-6">
             <p className="text-sm text-gray-400">
-              © {new Date().getFullYear()} Beauty Master Academy.
+              © {new Date().getFullYear()} Manisha Makeover Academy.
               All Rights Reserved.
             </p>
           </div>

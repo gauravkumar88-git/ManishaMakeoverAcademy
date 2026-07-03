@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const ClassPurchase = require('./ClassPurchase');
 
 // ─── Notes ────────────────────────────────────────────────────────────────────
 const noteSchema = new mongoose.Schema({
@@ -98,4 +99,7 @@ module.exports = {
   Notification: mongoose.model('Notification', notificationSchema),
   Coupon: mongoose.model('Coupon', couponSchema),
   Blog: mongoose.model('Blog', blogSchema),
+
+  // NEW MODEL
+  ClassPurchase,
 };

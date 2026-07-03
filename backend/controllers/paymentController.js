@@ -127,7 +127,7 @@ exports.verifyPayment = async (req, res) => {
   // Send receipt email
   await sendEmail({
     to: user.email,
-    subject: '✅ Payment Confirmed - Beauty Master Academy',
+    subject: '✅ Payment Confirmed - ManishaMakeover Academy',
     template: 'paymentReceipt',
     data: {
       name: user.name,

@@ -31,9 +31,9 @@ const testimonials = [
 ];
 
 const plans = [
-  { name: 'Basic', price: '₹59', period: '/month', color: 'from-pink-500 to-rose-500', features: ['Live Classes Access', 'PDF Notes Download', 'Community Access', 'Attendance Tracking'], popular: false },
-  { name: 'Premium', price: '₹99', period: '/month', color: 'from-purple-500 to-pink-500', features: ['Everything in Basic', 'Class Recordings', 'Premium Content', 'Priority Support'], popular: true },
-  { name: 'VIP', price: '₹159', period: '/month', color: 'from-amber-400 to-rose-500', features: ['Everything in Premium', 'One-to-One Mentorship', 'Exclusive Workshops', 'Career Placement Help'], popular: false },
+  { name: 'Basic', price: '₹299', period: '/month', color: 'from-pink-500 to-rose-500', features: ['Live Classes Access', 'PDF Notes Download', 'Community Access', 'Attendance Tracking'], popular: false },
+  { name: 'Premium', price: '₹499', period: '/month', color: 'from-purple-500 to-pink-500', features: ['Everything in Basic', 'Class Recordings', 'Premium Content', 'Priority Support'], popular: true },
+  { name: 'VIP', price: '₹699', period: '/month', color: 'from-amber-400 to-rose-500', features: ['Everything in Premium', 'One-to-One Mentorship', 'Exclusive Workshops', 'Career Placement Help'], popular: false },
 ];
 
 export default function HomePage() {
@@ -43,12 +43,28 @@ export default function HomePage() {
   useEffect(() => { dispatch(fetchUpcomingClasses()); }, [dispatch]);
 
   return (
-    <div style={{ background: '#0D0010' }} className="overflow-x-hidden">
+   <div className="overflow-x-hidden relative">
 
       {/* ─── HERO ─────────────────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
         {/* Orbs */}
-        <div className="orb w-96 h-96 bg-pink-600 top-20 -left-48" style={{ opacity: 0.12 }} />
+        <div
+  className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full"
+  style={{
+    background: '#FFB6D9',
+    filter: 'blur(120px)',
+    opacity: .35
+  }}
+/>
+
+<div
+  className="absolute top-40 right-0 w-[400px] h-[400px] rounded-full"
+  style={{
+    background: '#D8B6FF',
+    filter: 'blur(120px)',
+    opacity: .35
+  }}
+/>
         <div className="orb w-80 h-80 bg-purple-600 bottom-20 -right-40" style={{ opacity: 0.12 }} />
         <div className="orb w-64 h-64 bg-rose-400 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ opacity: 0.06 }} />
 
@@ -58,14 +74,17 @@ export default function HomePage() {
           backgroundSize: '60px 60px',
         }} />
 
-        <div className="relative max-w-7xl mx-auto px-6 text-center">
+       <div className="relative max-w-5xl mx-auto px-6 flex flex-col items-center justify-center text-center">
           <motion.div variants={stagger} initial="hidden" animate="visible">
             <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-pink-500/20 mb-8">
               <span className="w-2 h-2 rounded-full bg-pink-500 animate-pulse-slow" />
-              <span className="text-pink-300 text-sm font-medium">India's #1 Online Beauty Academy</span>
+              <span className="text-pink-700 text-sm font-medium">India's #1 Online Beauty Academy</span>
             </motion.div>
 
-            <motion.h1 variants={fadeUp} className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-tight mb-6">
+            <motion.h1
+  variants={fadeUp}
+  className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-tight mb-6 text-center mx-auto"
+>
               Transform Your
               <br />
               <span className="gradient-text">Passion Into a</span>
@@ -73,8 +92,11 @@ export default function HomePage() {
               Professional Career
             </motion.h1>
 
-            <motion.p variants={fadeUp} className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed">
-              Learn from beauty experts through <span className="text-pink-300">live interactive classes</span>, premium notes, mentorship, and certification programs designed for aspiring beauty professionals.
+            <motion.p
+  variants={fadeUp}
+  className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto mb-10 leading-relaxed text-center"
+>
+              Learn from beauty experts through <span className="text-pink-600 font-semibold">live interactive classes</span>, premium notes, mentorship, and certification programs designed for aspiring beauty professionals.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -90,12 +112,12 @@ export default function HomePage() {
             {/* Stats */}
             <motion.div variants={fadeUp} className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
               {stats.map(({ value, label, icon: Icon }) => (
-                <div key={label} className="glass rounded-2xl p-4 text-center">
+                <div key={label} className="glass rounded-[30px] p-6 text-center backdrop-blur-glass">
                   <div className="w-10 h-10 rounded-xl bg-pink-gradient flex items-center justify-center mx-auto mb-2">
                     <Icon className="text-white" size={18} />
                   </div>
                   <div className="text-2xl font-bold text-white font-display">{value}</div>
-                  <div className="text-gray-400 text-xs mt-1">{label}</div>
+                  <div className="text-white text-xs mt-1">{label}</div>
                 </div>
               ))}
             </motion.div>
@@ -109,16 +131,16 @@ export default function HomePage() {
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <span className="badge mb-4">Why Choose Us</span>
             <h2 className="section-title text-white mb-4">Everything You Need to <span className="gradient-text">Succeed</span></h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">From live classes to certification, we provide a complete ecosystem for your beauty education journey.</p>
+            <p className="text-white max-w-2xl mx-auto">From live classes to certification, we provide a complete ecosystem for your beauty education journey.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="glass rounded-2xl p-6 card-hover group">
+                className="glass rounded-[30px] p-6 card-hover group shadow-glass">
                 <div className="text-4xl mb-4">{f.icon}</div>
-                <h3 className="text-white font-semibold text-lg mb-2 group-hover:text-pink-400 transition-colors">{f.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{f.desc}</p>
+                <h3 className="text-white  font-semibold text-lg mb-2 group-hover:text-pink-400 transition-colors">{f.title}</h3>
+                <p className="text-white text-sm leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -152,9 +174,9 @@ export default function HomePage() {
                     </div>
                   </div>
                   <div className="p-5">
-                    <h3 className="text-white font-semibold text-lg mb-2">{cls.title}</h3>
-                    <p className="text-gray-400 text-sm mb-4 line-clamp-2">{cls.description}</p>
-                    <div className="flex items-center gap-4 text-sm text-gray-400 mb-4">
+                    <h3 className="text-white  font-semibold text-lg mb-2">{cls.title}</h3>
+                    <p className="text-white text-sm mb-4 line-clamp-2">{cls.description}</p>
+                    <div className="flex items-center gap-4 text-sm text-white mb-4">
                       <span className="flex items-center gap-1"><FiCalendar size={14} /> {new Date(cls.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</span>
                       <span className="flex items-center gap-1"><FiClock size={14} /> {cls.time}</span>
                     </div>
@@ -173,30 +195,30 @@ export default function HomePage() {
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <span className="badge mb-4">Subscription Plans</span>
             <h2 className="section-title text-white mb-4">Choose Your <span className="gradient-text">Learning Path</span></h2>
-            <p className="text-gray-400">Flexible plans designed to match your learning goals and budget.</p>
+            <p className="text-white">Flexible plans designed to match your learning goals and budget.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {plans.map((plan, i) => (
               <motion.div key={plan.name} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className={`glass rounded-3xl p-8 relative card-hover ${plan.popular ? 'border border-pink-500/50' : ''}`}
+                className={`glass rounded-[36px] p-8 shadow-premium relative card-hover ${plan.popular ? 'border border-pink-500/50' : ''}`}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                    <span className="px-4 py-1 rounded-full text-xs font-bold text-white" style={{ background: 'linear-gradient(135deg, #E91E8C, #9C27B0)' }}>Most Popular</span>
+                    <span className="px-4 py-1 rounded-full text-xs font-bold text-purple-900" style={{ background: 'linear-gradient(135deg, #E91E8C, #9C27B0)' }}>Most Popular</span>
                   </div>
                 )}
-                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${plan.color} flex items-center justify-center text-white text-xl mb-4`}>
+                <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${plan.color} flex items-center justify-center text-purple-900 text-xl mb-4`}>
                   {i === 0 ? '🌸' : i === 1 ? '💎' : '👑'}
                 </div>
                 <h3 className="text-white text-xl font-bold mb-1">{plan.name}</h3>
                 <div className="flex items-baseline gap-1 mb-6">
                   <span className="text-4xl font-display font-bold text-white">{plan.price}</span>
-                  <span className="text-gray-400 text-sm">{plan.period}</span>
+                  <span className="text-white text-sm">{plan.period}</span>
                 </div>
                 <ul className="space-y-3 mb-8">
                   {plan.features.map(f => (
-                    <li key={f} className="flex items-center gap-3 text-sm text-gray-300">
+                    <li key={f} className="flex items-center gap-3 text-sm text-white">
                       <FiCheck className="text-pink-400 flex-shrink-0" size={16} />
                       {f}
                     </li>
@@ -225,12 +247,12 @@ export default function HomePage() {
                 <div className="flex gap-1 mb-4">
                   {[...Array(t.rating)].map((_, j) => <FiStar key={j} className="text-yellow-400 fill-yellow-400" size={16} />)}
                 </div>
-                <p className="text-gray-300 text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
+                <p className="text-white text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
                 <div className="flex items-center gap-3">
                   <img src={t.image} alt={t.name} className="w-10 h-10 rounded-full object-cover ring-2 ring-pink-500/30" />
                   <div>
-                    <div className="text-white font-semibold text-sm">{t.name}</div>
-                    <div className="text-gray-400 text-xs">{t.city}</div>
+                    <div className="text-purple-300 font-semibold text-sm">{t.name}</div>
+                    <div className="text-white text-xs">{t.city}</div>
                   </div>
                 </div>
               </motion.div>
@@ -243,9 +265,18 @@ export default function HomePage() {
       <section className="py-24 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <div className="glass rounded-3xl p-12" style={{ background: 'linear-gradient(135deg, rgba(233,30,140,0.1) 0%, rgba(123,45,139,0.1) 100%)', border: '1px solid rgba(233,30,140,0.2)' }}>
+            <div className="glass rounded-3xl p-12" style={{
+  background:
+    'linear-gradient(135deg, rgba(255,255,255,.25), rgba(255,255,255,.1))',
+
+  border:
+    '1px solid rgba(255,255,255,.3)',
+
+  backdropFilter:
+    'blur(30px)'
+}}>
               <h2 className="section-title text-white mb-4">Ready to Start Your <span className="gradient-text">Beauty Career?</span></h2>
-              <p className="text-gray-400 mb-8 max-w-xl mx-auto">Join 5000+ students who have transformed their passion into a thriving professional career.</p>
+              <p className="text-white mb-8 max-w-xl mx-auto">Join 5000+ students who have transformed their passion into a thriving professional career.</p>
               <div className="flex gap-4 justify-center">
                 <Link to="/register" className="btn-primary text-base px-8 py-4">Enroll Now — Free</Link>
                 <Link to="/contact" className="btn-outline text-base px-8 py-4">Talk to Advisor</Link>
