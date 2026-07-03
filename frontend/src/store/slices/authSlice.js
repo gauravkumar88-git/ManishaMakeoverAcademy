@@ -94,7 +94,7 @@ const authSlice = createSlice({
 
     builder
       .addCase(register.pending, handlePending)
-      .addCase(register.fulfilled, (state, action) => { handleAuth(state, action); toast.success('Welcome to Beauty Master Academy! 🌸'); })
+      .addCase(register.fulfilled, (state, action) => { handleAuth(state, action); toast.success('Welcome to Manisha Makeover Academy! 🌸'); })
       .addCase(register.rejected, handleRejected)
 
       .addCase(login.pending, handlePending)

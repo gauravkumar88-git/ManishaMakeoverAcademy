@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
 
   await sendEmail({
     to: user.email,
-    subject: '🌸 Welcome to Beauty Master Academy!',
+    subject: '🌸 Welcome to Manisha Makeover Academy!',
     template: 'welcome',
     data: { name: user.name },
   });
