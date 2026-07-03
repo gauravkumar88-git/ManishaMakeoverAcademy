@@ -50,7 +50,7 @@ export default function VerifyCertificatePage() {
               {/* Academy Logo */}
               <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center text-white font-bold text-2xl font-display"
                 style={{ background: 'linear-gradient(135deg,#E91E8C,#9C27B0)' }}>B</div>
-              <p className="text-pink-300 text-sm font-medium mb-1">Beauty Master Academy</p>
+              <p className="text-pink-300 text-sm font-medium mb-1">Manisha Makeover Academy</p>
               <p className="text-gray-500 text-xs mb-8">Certificate of Completion</p>
 
               {/* Certificate Content */}

@@ -12,6 +12,7 @@ export const register = createAsyncThunk('auth/register', async (data, { rejectW
   }
 });
 
+
 export const login = createAsyncThunk('auth/login', async (data, { rejectWithValue }) => {
   try {
     const res = await api.post('/auth/login', data);
@@ -126,3 +127,4 @@ const authSlice = createSlice({
 
 export const { clearError, setUser } = authSlice.actions;
 export default authSlice.reducer;
+
