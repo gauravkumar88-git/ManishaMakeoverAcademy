@@ -10,9 +10,9 @@ const razorpay = new Razorpay({
 });
 
 const PLANS = {
-  basic:   { price: 299,  label: 'Basic',   duration: 30 },
-  premium: { price: 499,  label: 'Premium',  duration: 30 },
-  vip:     { price: 699, label: 'VIP',      duration: 30 },
+  basic:   { price: 29900,  label: 'Basic',   duration: 30 },
+  premium: { price: 49900,  label: 'Premium',  duration: 30 },
+  vip:     { price: 69900, label: 'VIP',      duration: 30 },
 };
 
 // @POST /api/payments/create-order
