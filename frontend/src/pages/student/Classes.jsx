@@ -298,26 +298,40 @@ export default function StudentClasses() {
                             View Plans
                           </Link>
                         )
-                      ) : cls.status === "completed" ? (
-                        cls.recordingUrl ? (
-                          <a
-                            href={cls.recordingUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium bg-purple-500/20 text-purple-400"
-                          >
-                            <FiVideo size={15} />
-                            Watch Recording
-                          </a>
-                        ) : (
-                          <button
-                            disabled
-                            className="flex-1 py-2.5 rounded-xl text-sm font-medium bg-gray-500/10 text-gray-400"
-                          >
-                            Completed
-                          </button>
-                        )
-                      ) : (
+                     ) : cls.status === "completed" ? (
+  hasAccess ? (
+    <div className="flex gap-2">
+      {cls.recordingUrl && (
+        <a
+          href={cls.recordingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium bg-purple-500/20 text-purple-400"
+        >
+          <FiVideo size={15} />
+          Recording
+        </a>
+      )}
+
+      <Link
+        to={`/student/notes/${cls._id}`}
+        className="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-medium text-white"
+        style={{
+          background: "linear-gradient(135deg,#E91E8C,#9C27B0)",
+        }}
+      >
+        📄 View Notes
+      </Link>
+    </div>
+  ) : (
+    <button
+      disabled
+      className="flex-1 py-2.5 rounded-xl text-sm font-medium bg-gray-500/10 text-gray-400"
+    >
+      No Access
+    </button>
+  )
+) : (
                         <button
                           disabled
                           className="flex-1 py-2.5 rounded-xl text-sm font-medium bg-red-500/10 text-red-400"

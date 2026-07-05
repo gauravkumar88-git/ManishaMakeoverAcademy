@@ -1,19 +1,80 @@
 // ─── Notes Controller ─────────────────────────────────────────────────────────
-const { Note, Attendance, Certificate, Notification } = require('../models/index');
-const Class = require('../models/Class');
+const {
+  Note,
+  Attendance,
+  Certificate,
+  Notification,
+  ClassPurchase,
+} = require("../models/index");const Class = require('../models/Class');
 const User = require('../models/User');
 const { v4: uuidv4 } = require('uuid');
 const QRCode = require('qrcode');
 
 // Notes
 exports.getNotesByClass = async (req, res) => {
-  const notes = await Note.find({ classId: req.params.classId }).sort({ createdAt: -1 });
-  res.json({ success: true, notes });
+  try {
+    const classId = req.params.classId;
+
+    const cls = await Class.findById(classId);
+
+    if (!cls) {
+      return res.status(404).json({
+        success: false,
+        message: "Class not found",
+      });
+    }
+
+    let hasAccess = false;
+
+    // Individual class
+    if (cls.accessType === "individual") {
+      const purchase = await ClassPurchase.findOne({
+        userId: req.user._id,
+        classId,
+      });
+
+      hasAccess = !!purchase;
+    }
+
+    // Subscription class
+    else {
+      hasAccess = req.user.subscriptionActive;
+    }
+
+    if (!hasAccess) {
+      return res.status(403).json({
+        success: false,
+        message: "You don't have access to these notes.",
+      });
+    }
+
+    const notes = await Note.find({ classId }).sort({
+      createdAt: -1,
+    });
+
+    res.json({
+      success: true,
+      notes,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
 exports.getAllNotes = async (req, res) => {
-  const notes = await Note.find().populate('classId', 'title date').sort({ createdAt: -1 });
-  res.json({ success: true, notes });
+  const notes = await Note.find()
+    .populate("classId", "title date accessType")
+    .sort({ createdAt: -1 });
+
+  res.json({
+    success: true,
+    notes,
+  });
 };
 
 exports.uploadNote = async (req, res) => {
@@ -29,12 +90,6 @@ const note = await Note.create({
   type: type || 'notes',
   uploadedBy: req.user._id
 });
-
-  res.status(201).json({
-    success: true,
-    note
-  });
-
 
 
   // Notify students
