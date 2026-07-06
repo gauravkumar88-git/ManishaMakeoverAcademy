@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../store/slices/authSlice';
-import { toggleDarkMode } from '../../store/slices/uiSlice';
+// import { toggleDarkMode } from '../../store/slices/uiSlice';
 import { fetchNotifications, markAllRead } from '../../store/slices/notificationSlice';
 import { FiSun, FiMoon, FiBell, FiMenu, FiX, FiChevronDown, FiLogOut, FiUser, FiGrid } from 'react-icons/fi';
 
@@ -26,7 +26,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { user, isAuthenticated } = useSelector(s => s.auth);
-  const { darkMode } = useSelector(s => s.ui);
+  // const { darkMode } = useSelector(s => s.ui);
   const { list: notifications, unreadCount } = useSelector(s => s.notifications);
 
   useEffect(() => {
@@ -87,11 +87,11 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           {/* Dark mode toggle */}
           <button
-            onClick={() => dispatch(toggleDarkMode())}
-            className="p-2 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all"
-          >
-            {darkMode ? <FiSun size={18} /> : <FiMoon size={18} />}
-          </button>
+  className="p-2 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-all cursor-default"
+  type="button"
+>
+  <FiMoon size={18} />
+</button>
 
           {isAuthenticated ? (
             <>
