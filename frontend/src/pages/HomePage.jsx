@@ -202,7 +202,7 @@ export default function HomePage() {
             >
               <span className="w-2 h-2 rounded-full bg-pink-500 animate-pulse-slow" />
               <span className="text-pink-700 text-sm font-medium">
-                India's #1 Online Beauty Academy
+                India's Online Beauty Academy
               </span>
             </motion.div>
 
@@ -388,37 +388,44 @@ export default function HomePage() {
                           <FiClock size={14} /> {cls.time}
                         </span>
                       </div>
-                      {cls.accessType === "individual" ? (
-                        hasPurchased ? (
-                          <Link
-                            to={`/student/classes`}
-                            className="btn-primary w-full text-center text-sm py-2 block"
-                          >
-                            Join Class
-                          </Link>
-                        ) : (
-                          <Link
-                            to={`/buy-class/${cls._id}`}
-                            className="w-full text-center text-sm py-2 block rounded-xl bg-green-600 text-white"
-                          >
-                            Buy Now ₹{cls.price}
-                          </Link>
-                        )
-                      ) : hasAccess ? (
-                        <Link
-                          to="/student/classes"
-                          className="btn-primary w-full text-center text-sm py-2 block"
-                        >
-                          Join Class
-                        </Link>
-                      ) : (
-                        <Link
-                          to="/pricing"
-                          className="btn-primary w-full text-center text-sm py-2 block"
-                        >
-                          View Plans
-                        </Link>
-                      )}
+                      {cls.status === "completed" ? (
+  <button
+    disabled
+    className="w-full py-2 rounded-xl bg-gray-600 text-white cursor-not-allowed"
+  >
+    Completed
+  </button>
+) : cls.accessType === "individual" ? (
+  hasPurchased ? (
+    <Link
+      to="/student/classes"
+      className="btn-primary w-full text-center text-sm py-2 block"
+    >
+      Join Class
+    </Link>
+  ) : (
+    <Link
+      to={`/buy-class/${cls._id}`}
+      className="w-full text-center text-sm py-2 block rounded-xl bg-green-600 text-white"
+    >
+      Buy Now ₹{cls.price}
+    </Link>
+  )
+) : hasAccess ? (
+  <Link
+    to="/student/classes"
+    className="btn-primary w-full text-center text-sm py-2 block"
+  >
+    Join Class
+  </Link>
+) : (
+  <Link
+    to="/pricing"
+    className="btn-primary w-full text-center text-sm py-2 block"
+  >
+    View Plans
+  </Link>
+)}
                     </div>
                   </motion.div>
                 );

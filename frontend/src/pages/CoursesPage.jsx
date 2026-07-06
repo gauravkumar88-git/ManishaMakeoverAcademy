@@ -136,7 +136,28 @@ export default function CoursesPage() {
                     <span className="flex items-center gap-1"><FiCalendar size={12} /> {new Date(cls.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}</span>
                     <span className="flex items-center gap-1"><FiClock size={12} /> {cls.time}</span>
                   </div>
-                 {cls.accessType === "individual" ? (
+                 {cls.status === "completed" ? (
+
+  cls.recordingUrl ? (
+    <a
+      href={cls.recordingUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold bg-purple-600 text-white"
+    >
+      <FiPlay size={14} />
+      Watch Recording
+    </a>
+  ) : (
+    <button
+      disabled
+      className="w-full py-2.5 rounded-xl text-sm font-semibold bg-gray-600 text-white cursor-not-allowed"
+    >
+      Completed
+    </button>
+  )
+
+) : cls.accessType === "individual" ? (
 
   purchasedClasses.includes(cls._id.toString()) ? (
 
