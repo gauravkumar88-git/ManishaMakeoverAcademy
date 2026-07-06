@@ -35,7 +35,7 @@ export default function DashboardLayout({ children }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector(s => s.auth);
-console.log("USER DATA:", user);
+// console.log("USER DATA:", user);
   const isAdmin = user?.role === 'admin';
   const navItems = isAdmin ? adminNav : studentNav;
 
