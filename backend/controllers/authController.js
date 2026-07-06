@@ -27,12 +27,12 @@ exports.register = async (req, res) => {
   const referralCode = uuidv4().slice(0, 8).toUpperCase();
   const user = await User.create({ name, email, password, phone, referralCode });
 
-  await sendEmail({
-    to: user.email,
-    subject: '🌸 Welcome to Manisha Makeover Academy!',
-    template: 'welcome',
-    data: { name: user.name },
-  });
+  // await sendEmail({
+  //   to: user.email,
+  //   subject: '🌸 Welcome to Manisha Makeover Academy!',
+  //   template: 'welcome',
+  //   data: { name: user.name },
+  // });
 
   const token = generateToken(user._id);
   sendTokenCookie(res, token);
@@ -67,7 +67,7 @@ exports.googleLogin = async (req, res) => {
   } else {
     const referralCode = uuidv4().slice(0, 8).toUpperCase();
     user = await User.create({ name, email, googleId, avatar: picture, referralCode, isVerified: true });
-    await sendEmail({ to: user.email, subject: '🌸 Welcome to Manisha Makeover Academy!', template: 'welcome', data: { name } });
+    // await sendEmail({ to: user.email, subject: '🌸 Welcome to Manisha Makeover Academy!', template: 'welcome', data: { name } });
   }
 
   const token = generateToken(user._id);
