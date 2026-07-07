@@ -19,7 +19,7 @@ export default function RegisterPage() {
   const result = await dispatch(register(form));
 
   if (!result.error) {
-    alert("Account created successfully. Please login.");
+    // alert("Account created successfully. Please login.");
     navigate("/login");
   }
 };
