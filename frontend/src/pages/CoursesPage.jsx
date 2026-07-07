@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../utils/api';
 import { FiCalendar, FiClock, FiUser, FiFilter, FiPlay } from 'react-icons/fi';
 
 const CATEGORIES = ['all', 'bridal', 'skincare', 'hair', 'nail', 'makeup', 'eyebrow', 'mehndi'];
 
 export default function CoursesPage() {
+  const navigate = useNavigate();
   const [purchasedClasses, setPurchasedClasses] = useState([]);
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -163,7 +164,10 @@ export default function CoursesPage() {
 
     cls.status === "live" ? (
       <button
-        onClick={() => navigate("/my-classes")}
+        onClick={() => {
+  console.log("clicked");
+  navigate("/my-classes");
+}}
         className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold text-white"
         style={{
           background: "linear-gradient(135deg,#E91E8C,#9C27B0)",
