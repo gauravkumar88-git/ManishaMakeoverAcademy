@@ -21,23 +21,31 @@ const sendTokenCookie = (res, token) => {
 // @POST /api/auth/register
 exports.register = async (req, res) => {
   const { name, email, password, phone } = req.body;
+
   const existing = await User.findOne({ email });
-  if (existing) return res.status(400).json({ success: false, message: 'Email already registered.' });
+
+  if (existing) {
+    return res.status(400).json({
+      success: false,
+      message: "Email already registered.",
+    });
+  }
 
   const referralCode = uuidv4().slice(0, 8).toUpperCase();
-  const user = await User.create({ name, email, password, phone, referralCode });
 
-  // await sendEmail({
-  //   to: user.email,
-  //   subject: '🌸 Welcome to Manisha Makeover Academy!',
-  //   template: 'welcome',
-  //   data: { name: user.name },
-  // });
+  await User.create({
+    name,
+    email,
+    password,
+    phone,
+    referralCode,
+  });
 
- res.status(201).json({
-  success: true,
-  message: "Account created successfully. Please login."
-});
+  return res.status(201).json({
+    success: true,
+    message: "Account created successfully. Please login.",
+  });
+}; // <-- THIS WAS MISSING
 
 // @POST /api/auth/login
 exports.login = async (req, res) => {
@@ -142,4 +150,4 @@ exports.changePassword = async (req, res) => {
   user.password = req.body.newPassword;
   await user.save();
   res.json({ success: true, message: 'Password updated.' });
-}};
+};

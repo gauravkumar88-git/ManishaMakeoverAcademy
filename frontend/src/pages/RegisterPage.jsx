@@ -67,7 +67,6 @@ export default function RegisterPage() {
       );
 
       if (!result.error) {
-  alert("Account created successfully. Please login.");
   navigate("/login");
 }
 

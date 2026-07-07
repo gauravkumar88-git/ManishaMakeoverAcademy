@@ -86,7 +86,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       if (action.payload.token) localStorage.setItem('token', action.payload.token);
     };
-    const handleRejected = (state, action) => {
+    const handleRejected = (state, action) => { 
       state.loading = false;
       state.error = action.payload;
       toast.error(action.payload || 'Something went wrong');
@@ -94,8 +94,20 @@ const authSlice = createSlice({
 
     builder
       .addCase(register.pending, handlePending)
-      .addCase(register.fulfilled, (state, action) => { handleAuth(state, action); toast.success('Welcome to Manisha Makeover Academy! 🌸'); })
-      .addCase(register.rejected, handleRejected)
+
+.addCase(register.fulfilled, (state) => {
+  state.loading = false;
+  state.error = null;
+
+  // Don't login automatically
+  state.user = null;
+  state.token = null;
+  state.isAuthenticated = false;
+
+  toast.success("Account created successfully! Please login.");
+})
+
+.addCase(register.rejected, handleRejected)
 
       .addCase(login.pending, handlePending)
       .addCase(login.fulfilled, (state, action) => { handleAuth(state, action); toast.success(`Welcome back, ${action.payload.user.name}! 💄`); })
