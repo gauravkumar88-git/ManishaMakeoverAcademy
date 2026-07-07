@@ -142,4 +142,4 @@ exports.changePassword = async (req, res) => {
   user.password = req.body.newPassword;
   await user.save();
   res.json({ success: true, message: 'Password updated.' });
-};
+}};
