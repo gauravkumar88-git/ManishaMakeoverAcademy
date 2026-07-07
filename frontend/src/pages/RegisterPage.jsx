@@ -14,10 +14,15 @@ export default function RegisterPage() {
   const { loading } = useSelector(s => s.auth);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const result = await dispatch(register(form));
-    if (!result.error) navigate('/dashboard');
-  };
+  e.preventDefault();
+
+  const result = await dispatch(register(form));
+
+  if (!result.error) {
+    alert("Account created successfully. Please login.");
+    navigate("/login");
+  }
+};
 
   // const handleGoogle = () => {
   //   window.google?.accounts?.id?.initialize({
@@ -62,8 +67,9 @@ export default function RegisterPage() {
       );
 
       if (!result.error) {
-        navigate('/dashboard');
-      }
+  alert("Account created successfully. Please login.");
+  navigate("/login");
+}
 
     }}
     onError={() => {

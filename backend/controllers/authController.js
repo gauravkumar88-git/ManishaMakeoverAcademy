@@ -34,11 +34,10 @@ exports.register = async (req, res) => {
   //   data: { name: user.name },
   // });
 
-  const token = generateToken(user._id);
-  sendTokenCookie(res, token);
-
-  res.status(201).json({ success: true, token, user: { _id: user._id, name: user.name, email: user.email, role: user.role, avatar: user.avatar, subscriptionPlan: user.subscriptionPlan } });
-};
+ res.status(201).json({
+  success: true,
+  message: "Account created successfully. Please login."
+});
 
 // @POST /api/auth/login
 exports.login = async (req, res) => {
